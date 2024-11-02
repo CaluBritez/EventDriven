@@ -1,0 +1,27 @@
+/*
+Colores:
+
+Milk ---------------- #FAF3E6
+Azul Oscuro --------- #062540 
+Azul Medio ---------- #124168
+Celeste Oscuro ------ #235E80
+Amarillo ------------ #EAA007
+Naranja ------------- #D26911
+
+Naranja bordes ---------- #FC5439
+Azul Fondo -------------- #122449
+Beige ------------------- #FEF094
+
+*/
+
+
+#box-body-home {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #122449;
+}

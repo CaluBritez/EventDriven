@@ -1,0 +1,43 @@
+/*
+Colores:
+
+Milk ---------------- #FAF3E6
+Azul Oscuro --------- #062540 
+Azul Medio ---------- #124168
+Celeste Oscuro ------ #235E80
+Amarillo ------------ #EAA007
+Naranja ------------- #D26911
+
+Naranja bordes ---------- #FC5439
+Azul Fondo -------------- #122449
+Beige ------------------- #FEF094
+
+*/
+
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background-color: #FAF3E6;
+}
+div,form {
+  box-sizing: border-box;
+}
+.boton-naranja {
+  background-color: #FC5439;
+  color: #FEF094;
+  font-weight: bold;
+  height: 2rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  border: 2px solid #FC5439;
+  /*box-shadow: 0px 4px 10px rgba(246, 222, 184, 0.8);*/
+  /*box-shadow: 0px 4px 10px rgba(197, 114, 132, 0.8);*/
+}
+.boton-naranja:hover {
+  background-color: #122449;
+  box-shadow: 5px 5px 10px #FC5439;
+}
