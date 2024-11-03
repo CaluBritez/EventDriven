@@ -21,7 +21,64 @@ Beige ------------------- #FEF094
   height: auto;
   margin: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   background-color: #122449;
+}
+
+#box-center-home {
+  width: 80%;
+  height: 40rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.box-main-curso {
+  width: 15rem;
+  height: 20rem;
+  border-radius: 5px;
+  border: 2px solid #FC5439;
+  margin: 1.5rem;
+  box-shadow: 10px 10px 15px black;
+  display: flex;
+  flex-direction: column;
+  background-color: #062540;
+}
+.box-main-curso-img {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box-main-curso-img img{
+  width: 62%;
+  border-radius: 5px;
+}
+.box-main-curso-text {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #FEF094;
+}
+.box-main-curso-text p{
+  cursor: pointer;
+}
+.box-main-curso-text p:hover{
+  color: #D26911;
+}
+
+/* MODAL INSCRIPCION */
+
+#modal-inscripcion {
+  width: 30rem;
+  height: 25rem;
+  margin-bottom: 5rem;
+  border-radius: 5px;
+  border: 2px solid #FC5439;
+  background-color: #062540;
+
 }
