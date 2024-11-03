@@ -1,19 +1,34 @@
 import './css/Home.css'
-
+import { useEffect } from 'react'
 import { Header } from '../components/Header.jsx'
 
-import { useGetCursos } from '../hooks/useGetCursos.js'
+import { useCursosStore } from '../hooks/useCursosStore.js'
 
 import imgnode from '../assets/imgnode.png'
 import imgreact from '../assets/imgreact.jpg'
 import imgjs from '../assets/imgjs.jpg'
 
+
+
 export const Home = () => {
 
-  const cursos = useGetCursos();
-  console.log('desde page Home: ', cursos);
-  
+  const {cursos, fetchCursos, inscribirAlumno} = useCursosStore();
 
+  useEffect(() => {
+    fetchCursos();
+  }, []);
+
+  const inscribirAlCurso = async (cursoId) => {
+
+    try{
+      await inscribirAlumno(cursoId);
+      console.log('Alumno inscrito con Exito');
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+  
   return (
     <>
     <div id='box-body-home'>
@@ -22,10 +37,10 @@ export const Home = () => {
 
       <div id='box-center-home'>
 
-        {cursos.map((curso, index) => (
-            <div key={index} className='box-main-curso'>
+        {cursos.map((curso) => (
+            <div key={curso._id} className='box-main-curso'>
               <div className='box-main-curso-img'>
-              <img
+                <img
                   src={
                     curso.nombre === 'NodeJS' ? imgnode :
                     curso.nombre === 'ReactJS' ? imgreact :
@@ -37,14 +52,13 @@ export const Home = () => {
               </div>
               <div className='box-main-curso-text'>
                 <h3>{curso.nombre}</h3> {/* Reemplaza el nombre dinámicamente */}
-                <p>Inscribirse ahora</p>
+                <p onClick={() => inscribirAlCurso(curso._id)}>Inscribirse ahora</p>
               </div>
             </div>
         ))}
 
       </div>
 
-      <div id='modal-inscripcion'></div>
     </div>
     
     </>

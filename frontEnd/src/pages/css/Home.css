@@ -74,11 +74,24 @@ Beige ------------------- #FEF094
 /* MODAL INSCRIPCION */
 
 #modal-inscripcion {
-  width: 30rem;
-  height: 25rem;
+  width: 50rem;
+  height: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   margin-bottom: 5rem;
   border-radius: 5px;
   border: 2px solid #FC5439;
   background-color: #062540;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #FEF094;
+}
+#modal-inscripcion h3{
+  margin-bottom: 1rem;
+}
+#modal-inscripcion input{
+  margin-bottom: 1rem;
+  width: 60%;
 }

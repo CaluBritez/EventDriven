@@ -39,6 +39,7 @@ export const loginUsuario = async (req: Request, res: Response): Promise<any> =>
             ok: true,
             uid: user._id,
             name: user.nombre,
+            email: email,
             role: profesor ? 'Profesor' : 'Alumno',
             token: token
         });
