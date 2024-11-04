@@ -22,8 +22,8 @@ export const useAuthStore = () => {
       localStorage.setItem('token', data.token );
       localStorage.setItem('token-init-date', new Date().getTime() );
 
-      dispatch( onLogin({ name: data.name, uid: data.uid, email: data.email }));
-      
+      dispatch( onLogin({ name: data.name, uid: data.uid, email: data.email, role: data.role }));
+      console.log(data);
     
     } catch (error) {
       dispatch( onLogout('Credenciales incorrectas') );
@@ -43,10 +43,11 @@ export const useAuthStore = () => {
     try {
 
       const { data } = await codeAcademyApi.get('/auth/renew');
+      console.log(data);
 
       localStorage.setItem('token', data.token );
       localStorage.setItem('token-init-date', new Date().getTime() );
-      dispatch( onLogin({ name: data.name, uid: data.uid }) );
+      dispatch( onLogin({ name: data.name, uid: data.uid,  }) );
 
     } catch (error) {
       localStorage.clear();
