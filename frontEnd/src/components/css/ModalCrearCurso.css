@@ -1,0 +1,88 @@
+.box-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30rem;
+    height: auto;
+
+    display: flex;
+    /* justify-content: flex-start; */
+    align-items: center;
+    flex-direction: column;
+    background-color: #062540;
+    color: #FEF094;
+    border: 2px solid #FC5439;
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.box-header-modal-curso {
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.modal-close {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 8px;
+}
+
+.modal-title {
+    justify-content: center;
+    align-items: center;
+    color: #EAA007;
+}
+
+.box-body-modal-curso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form-curso {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.box-input-modal-curso label {
+    font-size: 1rem;
+    color: #FEF094;
+}
+
+.box-input-modal-curso input[type="text"],
+.box-input-modal-curso input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #FC5439;
+    border-radius: 5px;
+    background-color: #FAF3E6;
+    color: #062540;
+}
+
+.box-input-modal-curso input[type="text"]:focus,
+.box-input-modal-curso input[type="file"]:focus {
+    border-color: #D26911;
+    outline: none;
+}
+.modalMostrarActivo {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modalMostrarInactivo {
+    display: none;
+}

@@ -29,16 +29,79 @@ Beige ------------------- #FEF094
 
 #box-center-home {
   width: 80%;
-  height: 40rem;
+  min-height: 100vh;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
 }
+
+.box-nav-profesor, .box-nav-alumno {
+  width: 100%;
+  height: 5rem;
+  background-color: #062540;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FEF094;
+  box-shadow: 10px 10px 15px black;
+  /* margin-top: 15px; */
+}
+
+.nav-profesor, .nav-alumno {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  padding: 0 1rem;
+}
+
+.nav-profesor p, .nav-alumno p {
+  font-size: 1.2rem;
+  color: #FEF094;
+  margin: 0;
+}
+
+.nav-profesor button, .nav-alumno button {
+  background-color: #EAA007;
+  color: #FAF3E6;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.nav-profesor button:hover, .nav-alumno button:hover {
+  background-color: #D26911;
+}
+
+.box-title {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FEF094;
+  /* margin-top: 1.5rem; */
+}
+
+.box-cursos {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
 .box-main-curso {
   width: 15rem;
   height: 20rem;
   border-radius: 5px;
   border: 2px solid #FC5439;
-  margin: 1.5rem;
+  margin: 0 1.5rem 1.5rem 1.5rem;
   box-shadow: 10px 10px 15px black;
   display: flex;
   flex-direction: column;
