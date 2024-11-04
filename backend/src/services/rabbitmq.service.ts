@@ -1,6 +1,7 @@
 import amqp, { Channel, Connection } from 'amqplib';
 import { envs } from '../config/envs';
 import { Request, Response, NextFunction } from 'express';
+import nodemailer from 'nodemailer';
 
 const rabbitMqUrl = envs.RABBITMQ_URL;
 
@@ -8,8 +9,8 @@ let connection: Connection;
 let channel: Channel;
 
 interface SendNotificationBody {
-    userEmail: string;
-    courseName: string;
+    email: string;
+    nombre: string;
 }
 
 // conectamos a rabbitmq y creamos un canal de comunicación
@@ -24,14 +25,7 @@ export async function connectRabbitMQ(): Promise<void> {
     }
 }
 
-export async function sendNotificationToQueue(req: Request<{}, {}, SendNotificationBody>,res: Response,next: NextFunction): Promise<void> {
-    const { userEmail, courseName } = req.body;
-
-    if (!userEmail || !courseName) {
-        res.status(400).json({ error: 'Se requieren userEmail y courseName en el body de la solicitud.' });
-        return;
-    }
-
+export async function sendNotificationToQueue(email: string, nombre: string): Promise<void> {
     try {
         if (!channel) {
             throw new Error('El canal de RabbitMQ no está inicializado. Asegúrate de haber llamado a connectRabbitMQ.');
@@ -39,19 +33,16 @@ export async function sendNotificationToQueue(req: Request<{}, {}, SendNotificat
 
         const queue = 'notification_queue';
         await channel.assertQueue(queue, { durable: true });
-        const message = JSON.stringify({ userEmail, courseName });
+        const message = JSON.stringify({ email, nombre });
         channel.sendToQueue(queue, Buffer.from(message));
 
         console.log(`Mensaje enviado a la cola ${queue}: ${message}`);
-        res.status(200).json({ message: 'Mensaje enviado a la cola correctamente.' });
-
     } catch (error) {
         console.error('Error al enviar mensaje a RabbitMQ:', error);
-        res.status(500).json({ error: 'Error al enviar el mensaje a RabbitMQ' });
-        next(error);
+        throw error;
     }
 }
-// Función para consumir mensajes de la cola
+
 export async function receiveMessages(): Promise<void> {
     if (!channel) {
         throw new Error("El canal de RabbitMQ no está inicializado");
@@ -61,12 +52,41 @@ export async function receiveMessages(): Promise<void> {
     await channel.assertQueue(queue, { durable: true });
     console.log("Esperando mensajes en la cola...");
 
-    channel.consume(queue, (msg) => {
+    channel.consume(queue, async (msg) => {
         if (msg !== null) {
-            const { userEmail, courseName } = JSON.parse(msg.content.toString());
-            console.log(`Enviando correo a ${userEmail} sobre el curso ${courseName}`);
-            // Aquí iría el código para enviar el correo.
-            channel.ack(msg);
+            const { email, nombre } = JSON.parse(msg.content.toString());
+            console.log(`Enviando correo a ${email} sobre el curso ${nombre}`);
+
+            // Configuración de nodemailer
+            const transporter = nodemailer.createTransport({
+                host: 'smtp.office365.com', // Servidor SMTP de Outlook
+                port: 587,
+                secure: false, // Utiliza TLS
+                auth: {
+                    user: 'codeAcademyyy@outlook.com', // Tu dirección de correo de Outlook
+                    pass: 'g8f9p6rwap', // Tu contraseña de Outlook
+                },
+                tls: {
+                    ciphers: 'SSLv3'
+                }
+            });
+
+            // Contenido del correo
+            const mailOptions = {
+                from: 'codeAcademyyy@outlook.com',
+                to: email,
+                subject: `Confirmación de Inscripción en ${nombre}`,
+                text: `Hola, te has inscrito exitosamente en el curso ${nombre}. ¡Bienvenido!`
+            };
+
+            try {
+                await transporter.sendMail(mailOptions);
+                console.log(`Correo enviado a ${email}`);
+                channel.ack(msg); // Confirmación exitosa del mensaje
+            } catch (error) {
+                console.error(`Error al enviar correo a ${email}:`, error);
+                channel.nack(msg, false, false); // No reintentar si ocurre un error
+            }
         }
     });
 }

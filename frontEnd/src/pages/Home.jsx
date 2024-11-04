@@ -18,10 +18,10 @@ export const Home = () => {
     fetchCursos();
   }, []);
 
-  const inscribirAlCurso = async (cursoId) => {
+  const inscribirAlCurso = async (cursoId, nombreCurso) => {
 
     try{
-      await inscribirAlumno(cursoId);
+      await inscribirAlumno(cursoId,nombreCurso);
       console.log('Alumno inscrito con Exito');
     }
     catch(error){
@@ -52,7 +52,7 @@ export const Home = () => {
               </div>
               <div className='box-main-curso-text'>
                 <h3>{curso.nombre}</h3> {/* Reemplaza el nombre dinámicamente */}
-                <p onClick={() => inscribirAlCurso(curso._id)}>Inscribirse ahora</p>
+                <p onClick={() => inscribirAlCurso(curso._id, curso.nombre)}>Inscribirse ahora</p>
               </div>
             </div>
         ))}

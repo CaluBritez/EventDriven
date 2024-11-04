@@ -1,6 +1,8 @@
 import { CursoService } from "../services/curso.service";
 import { Request, Response } from "express";
 
+import { sendNotificationToQueue } from "../services/rabbitmq.service";
+
 const cursoService = new CursoService();
 
 export class CursoController {
@@ -62,9 +64,11 @@ export class CursoController {
         try {
             const alumnoId = req.uid as string;
             const { id } = req.params;
-
+            const { email, nombre } = req.body; // Recibe email y nombre desde el body
+    
             const curso = await cursoService.inscribirAlumno(id, alumnoId);
-
+            await sendNotificationToQueue(email, nombre); // Llama a la función con email y nombre
+    
             res.status(200).json({
                 ok: true,
                 curso
