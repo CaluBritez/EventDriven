@@ -7,59 +7,60 @@ import { clearCursos } from '../store/cursos/cursosSlice.js';
 
 export const useAuthStore = () => {
 
-  const { status, user, errorMessage } = useSelector( state => state.auth );
-  
+  const { status, user, errorMessage } = useSelector(state => state.auth);
+
   const dispatch = useDispatch();
 
-  const startLogin = async( {email, password} ) => {
-    
-    dispatch( onChecking() );
+  const startLogin = async ({ email, password }) => {
 
-    try { 
+    dispatch(onChecking());
+
+    try {
       const { data } = await codeAcademyApi.post('/auth', { email, password });
 
 
-      localStorage.setItem('token', data.token );
-      localStorage.setItem('token-init-date', new Date().getTime() );
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('token-init-date', new Date().getTime());
 
-      dispatch( onLogin({ name: data.name, uid: data.uid, email: data.email, role: data.role }));
+      dispatch(onLogin({ name: data.name, uid: data.uid, email: data.email, role: data.role }));
       // console.log(data);
-    
+
     } catch (error) {
-      dispatch( onLogout('Credenciales incorrectas') );
+      dispatch(onLogout('Credenciales incorrectas'));
       setTimeout(() => {
-        dispatch( clearErrorMessage() );
+        dispatch(clearErrorMessage());
       }, 10);
-      
-      
+
+
     }
   }
 
   // Chekear autenticación
-  const checkAuthToken = async() => {
+  const checkAuthToken = async () => {
     const token = localStorage.getItem('token');
-    
-    if ( !token ) return dispatch( onLogout() );
+
+    if (!token) return dispatch(onLogout());
     try {
 
       const { data } = await codeAcademyApi.get('/auth/renew');
       // console.log(data);
 
-      localStorage.setItem('token', data.token );
-      localStorage.setItem('token-init-date', new Date().getTime() );
-      dispatch( onLogin({ name: data.name, uid: data.uid, email: data.email, role: data.role }) );
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('token-init-date', new Date().getTime());
+      dispatch(onLogin({ name: data.name, uid: data.uid, email: data.email, role: data.role }));
 
     } catch (error) {
       localStorage.clear();
-      dispatch( onLogout() );
-    }}
-  
+      dispatch(onLogout());
+    }
+  }
+
   // LOGOUT
   const startLogout = () => {
     localStorage.clear();
-    
-    dispatch( onLogout() );
-    dispatch( clearCursos() );
+
+    dispatch(onLogout());
+    dispatch(clearCursos());
   }
 
 

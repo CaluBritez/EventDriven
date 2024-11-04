@@ -46,6 +46,7 @@ export const useCursosStore = () => {
       if (!curso.data.ok) {
         toast.error('Error al publicar el curso');
       } else {
+        console.log(curso.data);
         toast.success('Curso publicado con exito');
       }
       return curso;
