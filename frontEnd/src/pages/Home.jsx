@@ -1,14 +1,16 @@
 import './css/Home.css';
 import { useEffect } from 'react';
-import { Header } from '../components/Header.jsx';
+import { useSelector } from 'react-redux';
 
-import { useCursosStore } from '../hooks/useCursosStore.js';
-
+import { GiTeacher } from "react-icons/gi";
+import { PiStudentBold } from "react-icons/pi";
 import imgnode from '../assets/imgnode.png';
 import imgreact from '../assets/imgreact.jpg';
 import imgjs from '../assets/imgjs.jpg';
 import imgramdom from '../assets/ramdom.jpeg';
-import { useSelector } from 'react-redux';
+
+import { Header } from '../components/Header.jsx';
+import { useCursosStore } from '../hooks/useCursosStore.js';
 import { ModalCrearCurso } from '../components/ModalCrearCurso.jsx';
 import { useUiStore } from '../hooks/useUiStore.js';
 
@@ -48,7 +50,7 @@ export const Home = () => {
             <>
               <div className='box-nav-profesor'>
                 <nav className='nav-profesor'>
-                  <p>Hola, profe {user.name}</p>
+                  <p>Hola Profe {user.name} <GiTeacher /></p>
                   <button onClick={openModal}>Agregar Curso</button>
                 </nav>
               </div>
@@ -92,7 +94,7 @@ export const Home = () => {
             <>
               <div className='box-nav-alumno'>
                 <nav className='nav-alumno'>
-                  <p>Hola, estudiante {user.name}</p>
+                  <p>Hola {user.name} <PiStudentBold /></p>
                   <button>Ver mis Cursos</button>
                 </nav>
               </div>
@@ -128,6 +130,7 @@ export const Home = () => {
             </>
           )}
         </div>
+        
       </div>
       <ModalCrearCurso />
     </>

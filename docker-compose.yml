@@ -15,7 +15,7 @@ services:
     image: mongo:5.0
     container_name: mongocontainer
     ports:
-      - "27017:27017"
+      - "27018:27017"
     env_file:
       - ./backend/.env
     volumes:
@@ -35,6 +35,9 @@ services:
       - mongo
     ports:
       - "8000:8000"
+    volumes:
+      - ./backend/src:/app/src  # Monta el código fuente en el contenedor
+      - /app/node_modules  # Evita conflictos con `node_modules`
     networks:
       - app-network
 
@@ -44,14 +47,12 @@ services:
       dockerfile: Dockerfile
     container_name: frontend-container
     ports:
-      - "3000:3000" 
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+      - "5174:5174" 
     networks:
       - app-network
+    volumes:
+      - ./frontend/src:/app/src  # Monta el código fuente en el contenedor
+      - /app/node_modules  # Evita conflictos con `node_modules`
 
 volumes:
   mongo_data:

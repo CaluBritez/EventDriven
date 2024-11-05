@@ -32,7 +32,9 @@ Beige ------------------- #FEF094
   min-height: 100vh;
   height: auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .box-nav-profesor, .box-nav-alumno {
@@ -44,7 +46,15 @@ Beige ------------------- #FEF094
   align-items: center;
   color: #FEF094;
   box-shadow: 10px 10px 15px black;
-  margin-top: 15px;
+  margin-top: 1.5rem;
+}
+.box-body-profesor{
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+.box-body-alumno{
+  margin-top: 3rem;
+  flex-wrap: wrap;
 }
 
 .nav-profesor, .nav-alumno {
@@ -62,7 +72,7 @@ Beige ------------------- #FEF094
 }
 
 .nav-profesor button, .nav-alumno button {
-  background-color: #EAA007;
+  background-color: #D26911;
   color: #FAF3E6;
   border: none;
   padding: 0.5rem 1rem;
@@ -74,7 +84,8 @@ Beige ------------------- #FEF094
 }
 
 .nav-profesor button:hover, .nav-alumno button:hover {
-  background-color: #D26911;
+  color: black;
+  background-color: #EAA007;
 }
 
 .box-title {
@@ -131,6 +142,7 @@ Beige ------------------- #FEF094
   align-items: center;
   color: #FEF094;
   margin-bottom: 1rem;
+  padding-top: 1rem;
 }
 .box-main-curso-text p{
   cursor: pointer;

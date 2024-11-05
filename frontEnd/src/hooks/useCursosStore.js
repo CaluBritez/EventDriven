@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import codeAcademyApi from '../api/codeAcademyApi.js';
 
 import { useDispatch } from 'react-redux';
-import { showCursos } from '../store/cursos/cursosSlice.js';
+import { showCursos, addCurso } from '../store/cursos/cursosSlice.js';
 import {useAuthStore} from '../hooks/useAuthStore.js';
 import { toast } from 'sonner';
 
@@ -43,6 +43,8 @@ export const useCursosStore = () => {
   const publicarCurso = async (data) => {
     try {
       const curso = await codeAcademyApi.post('/curso', data);
+      dispatch(addCurso(curso.data.curso));
+
       if (!curso.data.ok) {
         toast.error('Error al publicar el curso');
       } else {

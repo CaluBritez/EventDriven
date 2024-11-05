@@ -18,8 +18,12 @@ export const cursosSlice = createSlice({
     deleteCursoRedux: (state, { payload }) => {
       // Filtra los cursos y elimina el que coincide con el ID pasado en payload
       state.cursos = state.cursos.filter(curso => curso._id !== payload);
+    },
+    addCurso: (state, { payload }) => {
+      // Agrega el nuevo curso al array de cursos
+      state.cursos.push(payload);
     }
   }
 })
 
-export const { showCursos, clearCursos, deleteCursoRedux } = cursosSlice.actions
+export const { showCursos, clearCursos, deleteCursoRedux, addCurso } = cursosSlice.actions
