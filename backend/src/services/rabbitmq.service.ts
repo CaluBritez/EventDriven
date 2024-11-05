@@ -2,6 +2,7 @@ import amqp, { Channel, Connection } from 'amqplib';
 import { envs } from '../config/envs';
 import { Request, Response, NextFunction } from 'express';
 import nodemailer from 'nodemailer';
+import { template } from '../html/template';
 
 const rabbitMqUrl = envs.RABBITMQ_URL;
 
@@ -74,7 +75,7 @@ export async function receiveMessages(): Promise<void> {
                 from: 'coodeeacademyy@gmail.com',
                 to: email,
                 subject: `Confirmación de Inscripción en ${nombre}`,
-                text: `Hola, te has inscrito exitosamente en el curso ${nombre}. ¡Bienvenido!`
+                html: template(nombre),
             };
 
             try {
