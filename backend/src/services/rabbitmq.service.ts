@@ -59,21 +59,19 @@ export async function receiveMessages(): Promise<void> {
 
             // Configuración de nodemailer
             const transporter = nodemailer.createTransport({
-                host: 'smtp.office365.com', // Servidor SMTP de Outlook
-                port: 587,
-                secure: false, // Utiliza TLS
+                service: 'gmail',
                 auth: {
-                    user: 'codeAcademyyy@outlook.com', // Tu dirección de correo de Outlook
-                    pass: 'g8f9p6rwap', // Tu contraseña de Outlook
+                    user: 'coodeeacademyy@gmail.com',
+                    pass: 'azsp nkqf snaj fmhn',
+                    clientId: envs.OAUTH_CLIENTID,
+                    clientSecret: envs.OAUTH_CLIENTSECRET,
+                    refreshToken: envs.OAUTH_REFRESH_TOKEN
                 },
-                tls: {
-                    ciphers: 'SSLv3'
-                }
             });
 
             // Contenido del correo
             const mailOptions = {
-                from: 'codeAcademyyy@outlook.com',
+                from: 'coodeeacademyy@gmail.com',
                 to: email,
                 subject: `Confirmación de Inscripción en ${nombre}`,
                 text: `Hola, te has inscrito exitosamente en el curso ${nombre}. ¡Bienvenido!`
