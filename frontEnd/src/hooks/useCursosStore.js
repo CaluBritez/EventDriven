@@ -32,9 +32,12 @@ export const useCursosStore = () => {
       const email = user.email;
       const nombre = nombreCurso; 
       const { data } = await codeAcademyApi.post(`/curso/inscribir/${cursoId}`, {email, nombre});
-      console.log(data);
-      
-
+      if (!data.ok) {
+        toast.error('Error al inscribirse al curso');
+      } else {
+        console.log(data);
+        toast.success('Inscripción exitosa al curso!');
+      }
     } catch (error) {
       console.log(error);
     }
